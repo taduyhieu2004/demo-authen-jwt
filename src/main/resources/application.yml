@@ -3,6 +3,8 @@ spring:
     open-in-view: false
     show-sql: true
     database-platform: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      ddl-auto: update
     properties:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect
@@ -17,3 +19,11 @@ spring:
       host: ${REDIS_HOST:localhost}
       port: ${REDIS_PORT:6379}
 
+
+jwt:
+  access-token:
+    secret-key: b3NpbnRfYXBpX2F1dGhvcml6YXRpb25AMjAyM19hY2Nlc3NfdG9rZW4=
+    ttl: 2592000000
+  refresh-token:
+    secret-key: b3NpbnRfYXBpX2F1dGhvcml6YXRpb25AMjAyM19yZWZyZXNoX3Rva2Vu
+    ttl: 2592000000
