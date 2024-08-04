@@ -5,6 +5,6 @@ import com.example.demo_authen_jwt.exception.base.BadRequestException;
 
 public class UsernameNotNullException extends BadRequestException {
   public UsernameNotNullException() {
-    super("com.cyai.cms.exception.authenticate.UsernameNotNullException");
+    super("com.example.demo_authen_jwt.exception.authenticate.UsernameNotNullException");
   }
 }

@@ -38,7 +38,6 @@ import static org.springframework.http.HttpHeaders.AUTHORIZATION;
 @RequiredArgsConstructor
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
   private final TokenService tokenService;
-//  private final RedisTemplate<String, String> redisTemplate;
   private final UserService userService;
 
 

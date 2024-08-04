@@ -3,15 +3,19 @@ package com.example.demo_authen_jwt.service.impl;
 import com.example.demo_authen_jwt.dto.request.UserRequest;
 import com.example.demo_authen_jwt.dto.response.UserResponse;
 import com.example.demo_authen_jwt.entity.User;
+import com.example.demo_authen_jwt.exception.base.NotFoundException;
 import com.example.demo_authen_jwt.repositiory.UserRepository;
 import com.example.demo_authen_jwt.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import static com.example.demo_authen_jwt.utils.PasswordEncoderUtils.PASSWORD_ENCODER;
+
 @Service
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
   private final UserRepository repository;
+
   @Override
   public UserResponse create(UserRequest request) {
 
@@ -27,16 +31,26 @@ public class UserServiceImpl implements UserService {
     return toResponse(this.find(id));
   }
 
-  private User toEntity(UserRequest request){
+  @Override
+  public User findByUserName(String username) {
+    return repository.findByUsername(username).orElseThrow(NotFoundException::new);
+  }
+
+  @Override
+  public User findById(String id) {
+    return repository.findById(id).orElseThrow(NotFoundException::new);
+  }
+
+  private User toEntity(UserRequest request) {
     return new User(
           request.username(),
-          request.password(),
+          PASSWORD_ENCODER.encode(request.password()),
           request.fullName(),
           request.email()
     );
   }
 
-  private UserResponse toResponse(User user){
+  private UserResponse toResponse(User user) {
     return new UserResponse(
           user.getId(),
           user.getUsername(),
@@ -46,6 +60,6 @@ public class UserServiceImpl implements UserService {
   }
 
   private User find(String id) {
-    return repository.findById(id).orElseThrow(() -> new IllegalArgumentException("User not found"));
+    return repository.findById(id).orElseThrow(NotFoundException::new);
   }
 }
