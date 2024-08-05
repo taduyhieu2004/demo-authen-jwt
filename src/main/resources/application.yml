@@ -9,15 +9,10 @@ spring:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect
   datasource:
-    url: ${POSTGRES_URL:jdbc:postgresql://localhost:5432/dh?currentSchema=test}
+    url: ${POSTGRES_URL:jdbc:postgresql://localhost:5432/dh?currentSchema=your-schema}
     username: ${POSTGRES_USERNAME:postgres}
-    password: ${POSTGRES_PASSWORD:hieu112004}
+    password: ${POSTGRES_PASSWORD:postgres}
     driver-class-name: org.postgresql.Driver
-
-  data:
-    redis:
-      host: ${REDIS_HOST:localhost}
-      port: ${REDIS_PORT:6379}
 
 
 jwt:
